@@ -1,2 +1,13 @@
-# PRSDijkstraCuda
-Dijkstra's algorithm implemented using CUDA processors on the base of the NVidia GTX 1050 Graphics Card
+# Projekat iz predmeta Računarska vizija
+
+Implementacija igre Kamen, papir, makaze.
+
+Članovi grupe:
+
+Begić Lejla
+Borovac Selma
+Džigal Džemil
+Hodo Midhat
+Mamela Samira
+Šehović Emir
+Šoljić Haris
