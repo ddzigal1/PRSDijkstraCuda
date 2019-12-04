@@ -15,6 +15,8 @@ Mamela Samira
 
 Potreban python 2.
 
-pokretanje:
+#pokretanje:
+
 cd folder_sa_algoritmom
+
 python algoritam.py
