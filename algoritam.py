@@ -61,8 +61,11 @@ while video.isOpened():
             st = "Papir"
         elif cnt >=2:
             st = "Makaze"
-        else:
+        elif cnt >=1:
             st = "Kamen"
+	else:
+	    st = "Ne znam"
+
 
 
         cv2.putText(img3, st, (x,y-50), cv2.FONT_HERSHEY_SIMPLEX, 3,255)
@@ -71,6 +74,8 @@ while video.isOpened():
     cv2.drawContours(img2, contours, -1, (255, 255, 0), 3)
 
     cv2.imshow('kamen_papir_makaze', img3)
+    cv2.imshow('bez_filtera', img2)
+
 
     if cv2.waitKey(30) & 0xFF == ord('q'):
         break
