@@ -79,21 +79,21 @@ while video.isOpened():
         hull = cv2.convexHull(c, returnPoints=False)
         defects = cv2.convexityDefects(c, hull)
         cnt = 0
-
-        for i in range(defects.shape[0]):
-            s, e, f, d = defects[i, 0]
-            start = tuple(c[s][0])
-            end = tuple(c[e][0])
-            far = tuple(c[f][0])
-            cv2.line(img3, start, end, 255, 2)
-            cv2.circle(img3, far, 5, [0, 0, 255], -1)
-            a = math.sqrt((end[0] - start[0]) ** 2 + (end[1] - start[1]) ** 2)
-            b = math.sqrt((far[0] - start[0]) ** 2 + (far[1] - start[1]) ** 2)
-            ci = math.sqrt((end[0] - far[0]) ** 2 + (end[1] - far[1]) ** 2)
-            angle = math.acos((b ** 2 + ci ** 2 - a ** 2) / (2 * b * ci))
-            if angle <= math.pi / 2:
-                cnt += 1
-                cv2.circle(img3, far, 8, 255, -1)
+        if hasattr('defects','shape'):
+            for i in range(defects.shape[0]):
+                s, e, f, d = defects[i, 0]
+                start = tuple(c[s][0])
+                end = tuple(c[e][0])
+                far = tuple(c[f][0])
+                cv2.line(img3, start, end, 255, 2)
+                cv2.circle(img3, far, 5, [0, 0, 255], -1)
+                a = math.sqrt((end[0] - start[0]) ** 2 + (end[1] - start[1]) ** 2)
+                b = math.sqrt((far[0] - start[0]) ** 2 + (far[1] - start[1]) ** 2)
+                ci = math.sqrt((end[0] - far[0]) ** 2 + (end[1] - far[1]) ** 2)
+                angle = math.acos((b ** 2 + ci ** 2 - a ** 2) / (2 * b * ci))
+                if angle <= math.pi / 2:
+                    cnt += 1
+                    cv2.circle(img3, far, 8, 255, -1)
 
         cnt = 0 if not cnt else cnt+1
         st = "Papir"
