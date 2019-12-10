@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 import math
+
+# sd = ShapeDetector()
 face_cascade = cv2.CascadeClassifier('face2.xml')
 video = cv2.VideoCapture(0)
 hueLower=3
@@ -14,7 +16,7 @@ while video.isOpened():
     ret, img2 = video.read()
 
 
-    img = cv2.GaussianBlur(img2, (11, 11), 0)
+    img = cv2.GaussianBlur(img2, (11, 11), 5)
     faces = face_cascade.detectMultiScale(img2, 1.3, 5)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     img = cv2.inRange(img, (3, 50, 50), (15, 255, 255))
@@ -39,7 +41,7 @@ while video.isOpened():
         hull = cv2.convexHull(c, returnPoints=False)
         defects = cv2.convexityDefects(c, hull)
         cnt = 0
-        if hasattr('defects','shape'):
+        if hasattr(defects,'shape'):
             for i in range(defects.shape[0]):
                 s, e, f, d = defects[i, 0]
                 start = tuple(c[s][0])
@@ -56,26 +58,21 @@ while video.isOpened():
                     cv2.circle(img3, far, 8, 255, -1)
 
         cnt = 0 if not cnt else cnt+1
-        st = "Papir"
+        st = "Kamen"
         if cnt >=4:
             st = "Papir"
         elif cnt >=2:
             st = "Makaze"
         elif cnt >=1:
             st = "Kamen"
-	else:
-	    st = "Ne znam"
-
 
 
         cv2.putText(img3, st, (x,y-50), cv2.FONT_HERSHEY_SIMPLEX, 3,255)
         #print(cnt)
 
     cv2.drawContours(img2, contours, -1, (255, 255, 0), 3)
-
-    cv2.imshow('kamen_papir_makaze', img3)
-    cv2.imshow('bez_filtera', img2)
-
+    cv2.imshow('bez_filtera',img2)
+    cv2.imshow('KPM', img3)
 
     if cv2.waitKey(30) & 0xFF == ord('q'):
         break
